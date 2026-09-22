@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Космонавты СССР и России — «Поехали!» для юных звёздочётов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF4E6; --card:#FFFDF6; --ink:#26221B; --ink-soft:#6B6355;
+    --u:#F2A007; --u-soft:#FBE9C4; --u-deep:#8F5E02;
+    --i:#18A78E; --i-soft:#CDEEE2; --i-deep:#0C6E5C;
+    --r:#E2593B; --r-soft:#F8D9CC; --r-deep:#A93A1F;
+    --ok:#3E9B4F; --bad:#D64545;
+    --bp:#E9F2F5; --bp-ink:#1F546C;
+    --line:rgba(38,34,27,.075);
+    --shadow:6px 7px 0 rgba(38,34,27,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Nunito',sans-serif;color:var(--ink);background-color:var(--paper);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:28px 28px;line-height:1.55;overflow-x:hidden;
+  }
+  [hidden]{display:none!important}
+  h1,h2,h3{font-family:'Unbounded',sans-serif;line-height:1.25}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+  svg text{font-family:'Nunito',sans-serif}
+
+  #jsBadge{position:fixed;right:14px;bottom:14px;z-index:1200;background:var(--ink);color:#F5EFE0;
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.74rem;padding:7px 13px;
+    border-radius:999px;border:2px solid var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.25)}
+
+  .powerline{position:fixed;top:0;left:12px;right:44px;height:12px;z-index:900;pointer-events:none}
+  .pl-wire{position:absolute;left:0;right:0;top:5px;height:3px;border-radius:3px;background:var(--ink);opacity:.22}
+  .pl-dot{position:absolute;left:0;top:1px;width:11px;height:11px;border-radius:50%;
+    background:var(--u);border:2px solid var(--ink);box-shadow:0 0 0 3px var(--paper)}
+  .pl-lamp{position:fixed;top:1px;right:8px;z-index:900;width:22px;pointer-events:none}
+  .pl-lamp .bulb{fill:var(--card);stroke:var(--ink);stroke-width:2;transition:fill .4s}
+  .pl-lamp.lit .bulb{fill:var(--u)}
+
+  .hero{padding:64px 0 34px}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center}
+  .kicker{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.8rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+  h1{font-size:clamp(2.3rem,5.6vw,4rem);font-weight:900;margin-bottom:16px}
+  h1 mark{display:inline-block;background:var(--u);color:var(--ink);border:3px solid var(--ink);
+    border-radius:14px;padding:.02em .2em;transform:rotate(-2deg);box-shadow:var(--shadow)}
+  .lead{font-size:1.1rem;max-width:34em;color:#3d382e;margin-bottom:20px}
+  .stamp-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+  .stamp{border:2.5px solid var(--ink);border-radius:12px;background:var(--cs,#fff);
+    padding:8px 13px;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:.85rem;
+    cursor:help;box-shadow:3px 4px 0 rgba(38,34,27,.14)}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);
+    border:2.5px solid var(--ink);border-radius:14px;padding:12px 20px;font-family:'Nunito',sans-serif;
+    font-weight:800;font-size:1rem;cursor:pointer;box-shadow:4px 5px 0 rgba(38,34,27,.25);
+    text-decoration:none;transition:transform .15s}
+  .btn:hover{transform:translate(-2px,-2px)}
+  .hero-scene{background:var(--card);border:3px solid var(--ink);border-radius:24px;box-shadow:var(--shadow);padding:10px}
+  .hero-scene svg{display:block;width:100%;height:auto}
+  .scene-cap{text-align:center;font-size:.86rem;color:var(--ink-soft);padding:6px 6px 2px}
+  .hero-btns{display:flex;justify-content:center;gap:10px;padding-bottom:6px}
+  .tool{border:2.5px solid var(--ink);border-radius:12px;padding:9px 16px;font-weight:800;background:#fff;
+    cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;transition:transform .12s}
+  .tool:hover{transform:translateY(-2px);background:var(--u-soft)}
+
+  section{padding:64px 0 16px}
+  .sec-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:28px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.95rem;
+    border:2.5px solid var(--ink);border-radius:12px;padding:7px 11px;background:var(--ns,var(--u-soft));
+    transform:rotate(-3deg);box-shadow:3px 4px 0 rgba(38,34,27,.15);flex:none}
+  .sec-head h2{font-size:clamp(1.35rem,2.8vw,1.9rem);font-weight:700;margin-bottom:5px}
+  .sec-head p{color:#4a4438;max-width:54em}
+
+  .term{cursor:help;border-bottom:2.5px dashed rgba(38,34,27,.45);font-weight:700}
+  .term:hover{background:rgba(242,160,7,.18)}
+  #tooltip{position:fixed;z-index:1000;max-width:280px;background:var(--ink);color:var(--paper);
+    font-size:.86rem;line-height:1.45;padding:9px 13px;border-radius:11px;pointer-events:none;
+    opacity:0;transition:opacity .15s;font-weight:600}
+  #tooltip.show{opacity:1}
+  #tooltip::after{content:"";position:absolute;left:var(--ax,50%);bottom:-6px;width:12px;height:12px;
+    background:var(--ink);transform:translateX(-50%) rotate(45deg)}
+  #tooltip.below::after{bottom:auto;top:-6px}
+  .spark{position:fixed;width:9px;height:9px;z-index:1100;pointer-events:none}
+
+  .tl-card{background:var(--card);border:2.5px solid var(--ink);border-radius:22px;box-shadow:var(--shadow);padding:20px 22px}
+  .tl-line{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .tl-dot{border:2.5px solid var(--ink);border-radius:999px;background:#fff;cursor:pointer;
+    font-family:'JetBrains Mono',monospace;font-weight:800;font-size:.9rem;padding:8px 14px;transition:transform .12s}
+  .tl-dot:hover{transform:translateY(-2px);background:var(--u-soft)}
+  .tl-dot.sel{background:var(--ink);color:var(--paper)}
+  .tl-info{border:2.5px dashed var(--ink);border-radius:16px;padding:16px 20px;background:var(--paper)}
+  .tl-info b{font-family:'Unbounded',sans-serif;font-size:1.05rem;display:block;margin-bottom:6px}
+  .tl-info p{font-size:.95rem}
+  .tl-year{font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--u-deep)}
+
+  .hall-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}
+  .cos-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cos-card{background:var(--card);border:2.5px solid var(--ink);border-radius:18px;box-shadow:var(--shadow);
+    padding:10px 10px 12px;text-align:center;cursor:pointer;transition:transform .15s}
+  .cos-card:nth-child(odd){transform:rotate(-.6deg)}
+  .cos-card:nth-child(even){transform:rotate(.6deg)}
+  .cos-card:hover{transform:translateY(-4px)}
+  .ph-wrap{position:relative;width:100px;height:118px;margin:0 auto 6px;border-radius:12px;overflow:hidden;
+    background:var(--bp);border-bottom:2.5px solid var(--ink)}
+  .ph-illu svg{width:100%;height:100%;display:block}
+  .ph-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:none}
+  .cos-card b{font-family:'Unbounded',sans-serif;font-size:.78rem;display:block}
+  .cos-card span{font-size:.71rem;color:var(--ink-soft)}
+  .cos-panel{background:var(--card);border:2.5px solid var(--ink);border-radius:22px;
+    box-shadow:var(--shadow);padding:20px 22px;position:sticky;top:70px}
+  .p-top{display:flex;gap:16px;align-items:flex-start;margin-bottom:10px}
+  .p-photo-wrap{position:relative;flex:none;width:124px;height:146px;border:2.5px solid var(--ink);
+    border-radius:14px;overflow:hidden;background:var(--bp)}
+  .p-photo-wrap svg{width:100%;height:100%;display:block}
+  .p-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:none}
+  .cos-panel h3{font-size:1.12rem;margin-bottom:2px}
+  .cos-panel .years{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:.78rem;
+    color:var(--ink-soft);margin-bottom:2px;display:block}
+  .cos-panel .subline{font-size:.9rem;font-weight:800;color:var(--i-deep);margin-bottom:8px;display:block}
+  .cos-panel ul{margin:0 0 12px;padding-left:18px}
+  .cos-panel li{font-size:.92rem;margin-bottom:5px}
+  .quote{background:var(--u-soft);border:2px dashed var(--u);border-radius:12px;
+    padding:10px 14px;font-weight:700;font-style:italic;font-size:.92rem}
+  .credit{margin-top:12px;font-size:.72rem;color:var(--ink-soft);text-align:center}
+  .howto{margin-top:14px;background:var(--bp);border:2px dashed var(--bp-ink);border-radius:12px;
+    padding:10px 14px;font-size:.8rem;color:var(--bp-ink)}
+  .howto code{font-family:'JetBrains Mono',monospace;font-weight:800;background:#fff;
+    border:1.5px solid var(--bp-ink);border-radius:6px;padding:0 5px}
+
+  .lab-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:start}
+  .scene-card,.panel{background:var(--card);border:2.5px solid var(--ink);border-radius:24px;box-shadow:var(--shadow);padding:15px}
+  .scene-card svg{width:100%;height:auto;display:block}
+  .ctl{margin-bottom:10px}
+  .ctl .clabel{display:flex;justify-content:space-between;font-weight:800;font-size:.9rem;margin-bottom:3px}
+  .ctl .clabel b{font-family:'JetBrains Mono',monospace}
+  .ctl input[type=range]{width:100%;height:26px;cursor:pointer}
+  .kchip{display:inline-block;border:2.5px solid;border-radius:999px;padding:7px 15px;
+    font-weight:800;font-size:.9rem;margin:2px 0 8px}
+  .kchip.ok{background:#E4F3E6;border-color:var(--ok);color:var(--i-deep)}
+  .kchip.warn{background:var(--u-soft);border-color:var(--u);color:var(--u-deep)}
+  .kchip.bad{background:#FBE3E6;border-color:var(--bad);color:var(--bad)}
+  .pair-note{background:var(--u-soft);border:2px dashed var(--u);border-radius:12px;padding:10px 14px;
+    font-weight:700;font-size:.92rem;margin-top:10px}
+  .bridge{background:var(--i-soft);border:2px dashed var(--i);border-radius:14px;padding:12px 16px;
+    font-size:.95rem;font-weight:700;margin-top:16px}
+  .prof-row{display:flex;gap:12px;align-items:flex-start;margin-top:14px}
+  .prof-ava{flex:none;width:56px;height:56px}
+  .bubble{position:relative;background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+    padding:10px 13px;font-size:.9rem;flex:1;min-height:52px;transition:opacity .18s}
+  .bubble::after{content:"";position:absolute;left:-9px;top:20px;width:13px;height:13px;background:#fff;
+    border-left:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg)}
+
+  .hist{background:var(--card);border:2.5px solid var(--ink);border-radius:16px;padding:14px 18px;
+    box-shadow:var(--shadow);margin-top:18px}
+  .hist summary{font-weight:800;cursor:pointer;font-family:'Unbounded',sans-serif;font-size:.95rem}
+  .hist p{margin-top:8px;font-size:.93rem}
+
+  .ck-card{max-width:640px;margin:0 auto;background:var(--card);border:2.5px solid var(--ink);
+    border-radius:22px;box-shadow:var(--shadow);padding:22px 26px}
+  .ck-row{display:flex;gap:12px;align-items:flex-start;border:2px solid var(--ink);border-radius:14px;
+    background:var(--paper);padding:11px 14px;margin-bottom:10px;cursor:pointer;font-weight:700;font-size:.94rem}
+  .ck-row input{width:22px;height:22px;accent-color:var(--i);margin-top:2px;cursor:pointer;flex:none}
+  .ck-verdict{text-align:center;margin-top:6px}
+
+  .quiz-card{max-width:740px;margin:0 auto;background:var(--card);border:2.5px solid var(--ink);
+    border-radius:24px;box-shadow:var(--shadow);padding:26px 30px}
+  .q-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+  .q-lamps{display:flex;gap:8px}
+  .q-lamp{width:22px}
+  .q-lamp .bulb{fill:var(--card);stroke:var(--ink);stroke-width:2;transition:fill .3s}
+  .q-lamp.lit .bulb{fill:var(--u)}
+  .q-count{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;color:var(--ink-soft)}
+  .q-text{font-size:1.1rem;font-weight:600;margin-bottom:16px}
+  .q-answers{display:grid;gap:10px;margin-bottom:14px}
+  .q-ans{text-align:left;border:2.5px solid var(--ink);border-radius:14px;background:#fff;
+    padding:12px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.98rem;cursor:pointer;
+    transition:transform .12s;box-shadow:3px 4px 0 rgba(38,34,27,.14)}
+  .q-ans:not(:disabled):hover{transform:translate(-2px,-2px)}
+  .q-ans:disabled{cursor:default;opacity:.45}
+  .q-ans.good{background:#DFF2E1;border-color:var(--ok);opacity:1}
+  .q-ans.bad{background:#FBE3E3;border-color:var(--bad);opacity:1}
+  .hint-btn{border:2.5px dashed var(--ink);background:transparent;border-radius:12px;padding:8px 15px;
+    font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer}
+  .hint-btn:hover{background:var(--u-soft)}
+  .q-hint{background:var(--u-soft);border:2px dashed var(--u);border-radius:12px;padding:9px 14px;font-weight:700}
+  .q-why{background:#E4F3E6;border:2.5px solid var(--ok);border-radius:14px;padding:11px 15px;font-weight:600;margin-bottom:14px}
+  .q-final{text-align:center;padding:14px 0}
+  .qf-score{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ink-soft)}
+  .qf-title{font-family:'Unbounded',sans-serif;font-weight:900;font-size:1.5rem;margin:8px 0 12px;color:var(--u-deep)}
+  .shake{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+
+  .cheat{margin:56px auto 0;background:var(--ink);color:var(--paper);border-radius:24px;padding:26px 30px;box-shadow:var(--shadow)}
+  .cheat h3{color:var(--paper);font-size:1.15rem;margin-bottom:12px}
+  .cheat-row{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(.9rem,2.4vw,1.2rem);
+    display:flex;gap:8px 20px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .cheat-row .c1{color:#FFC64D}.cheat-row .c2{color:#4BD6BC}.cheat-row .c3{color:#FF8A66}
+  .rules4{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+  .rules4>div{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:14px;padding:12px 14px}
+  .rules4 b{display:block;font-family:'Unbounded',sans-serif;font-size:.8rem;margin-bottom:5px;color:#4BD6BC}
+  .rules4 p{font-size:.84rem;color:#D8D2C4}
+  .cheat>p{font-size:.93rem;color:#D8D2C4}
+  footer{padding:48px 22px 36px;text-align:center;color:var(--ink-soft);font-size:.9rem}
+  footer b{color:var(--ink)}
+
+  @media(max-width:980px){
+    .hero-grid,.lab-grid,.hall-grid{grid-template-columns:1fr}
+    .cos-panel{position:static}
+  }
+  @media(max-width:560px){.cos-grid{grid-template-columns:1fr 1fr}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="jsBadge">⏳ JS загружается…</div>
+
+<div class="powerline"><div class="pl-wire"></div><div class="pl-dot" id="plDot"></div></div>
+<svg class="pl-lamp" id="plLamp" viewBox="0 0 24 34" aria-hidden="true">
+  <path class="bulb" d="M12 2a9 9 0 0 1 9 9c0 3.4-2 5.6-3.4 7.4-.8 1-1.1 2-1.2 3.1H7.6c-.1-1.1-.4-2.1-1.2-3.1C5 16.6 3 14.4 3 11a9 9 0 0 1 9-9z"/>
+  <rect x="7" y="23.6" width="10" height="3.2" rx="1.4" fill="var(--ink)"/>
+  <rect x="7.6" y="28.4" width="8.8" height="2.6" rx="1.2" fill="var(--ink)"/>
+</svg>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">· урок одиннадцатый · герои орбит ·</div>
+      <h1><mark>Поехали!</mark></h1>
+      <p class="lead">12 апреля 1961 года советский лётчик Юрий Гагарин сказал это слово — и человечество
+        вышло в космос. Познакомимся с героями СССР и России, пройдём их путь по ленте времени
+        и поймём, почему на орбите <b class="term" data-term="neves">невесомость</b> —
+        продолжение законов Ньютона.</p>
+      <div class="stamp-row">
+        <span class="stamp term" data-term="orbit" style="--cs:var(--i-soft)">орбита · 7,9 км/с</span>
+        <span class="stamp term" data-term="cosmod" style="--cs:var(--u-soft)">Байконур · Восточный</span>
+        <span class="stamp term" data-term="iss" style="--cs:var(--r-soft)">МКС · 400 км</span>
+      </div>
+      <a class="btn" href="#hall">К залу славы</a>
+    </div>
+
+    <div class="hero-scene">
+      <svg id="heroSvg" viewBox="0 0 380 340" aria-label="Стартовый стол: нажмите Запуск">
+        <rect x="6" y="6" width="368" height="328" rx="16" fill="var(--bp)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="190" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--bp-ink)" font-family="JetBrains Mono,monospace">СТАРТОВЫЙ СТОЛ · КОСМОДРОМ ВОСТОЧНЫЙ</text>
+        <g id="orbScene" opacity="0">
+          <circle cx="60" cy="70" r="2.4" fill="#26221B" opacity=".55"/>
+          <circle cx="320" cy="54" r="2" fill="#26221B" opacity=".55"/>
+          <circle cx="270" cy="110" r="1.7" fill="#26221B" opacity=".45"/>
+          <circle cx="110" cy="140" r="1.8" fill="#26221B" opacity=".45"/>
+          <circle cx="190" cy="260" r="95" fill="#9CC6DA" stroke="var(--ink)" stroke-width="3"/>
+          <path d="M130 215 q26 -12 48 2 q22 14 44 4 q-18 22 -50 18 q-34 -4 -42 -24z" fill="#CBE8CF" stroke="rgba(38,34,27,.25)" stroke-width="1.5"/>
+          <path d="M236 262 q20 -8 34 4 q-14 14 -34 10 q-12 -6 0 -14z" fill="#CBE8CF" stroke="rgba(38,34,27,.25)" stroke-width="1.5"/>
+          <circle cx="190" cy="260" r="128" fill="none" stroke="rgba(38,34,27,.35)" stroke-width="1.8" stroke-dasharray="7 9"/>
+          <circle id="capDot" cx="190" cy="132" r="8" fill="var(--r)" stroke="var(--ink)" stroke-width="2.4"/>
+          <text x="236" y="120" font-size="10.5" font-weight="800" fill="var(--bp-ink)" font-family="JetBrains Mono,monospace">корабль на орбите</text>
+        </g>
+        <g id="rkScene">
+          <rect x="120" y="302" width="140" height="16" rx="4" fill="var(--ink)"/>
+          <rect x="176" y="290" width="28" height="12" fill="var(--r-deep)"/>
+          <g id="rkG" transform="translate(190,206)">
+            <path d="M0 -52 C 14 -34 20 -12 20 8 L20 40 L-20 40 L-20 8 C-20 -12 -14 -34 0 -52 Z"
+                  fill="var(--card)" stroke="var(--ink)" stroke-width="3"/>
+            <path d="M-20 20 L-36 44 L-20 44 Z" fill="var(--r)" stroke="var(--ink)" stroke-width="2.2"/>
+            <path d="M20 20 L36 44 L20 44 Z" fill="var(--r)" stroke="var(--ink)" stroke-width="2.2"/>
+            <circle cx="0" cy="-4" r="9" fill="var(--bp)" stroke="var(--ink)" stroke-width="2.4"/>
+            <text x="0" y="30" text-anchor="middle" font-size="9" font-weight="900" fill="var(--r-deep)" font-family="Unbounded,sans-serif">CCCP</text>
+            <g id="rkFlame" opacity="0">
+              <path d="M-9 44 Q0 74 9 44 Q0 52 -9 44 Z" fill="var(--u)" stroke="var(--u-deep)" stroke-width="1.6"/>
+              <path d="M-4 44 Q0 62 4 44 Q0 48 -4 44 Z" fill="var(--r)"/>
+            </g>
+          </g>
+        </g>
+        <text id="cdTxt" x="190" y="180" text-anchor="middle" font-size="64" font-weight="900" fill="var(--r-deep)" font-family="Unbounded,sans-serif" opacity="0"></text>
+        <text id="heroSpd" x="190" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="var(--bp-ink)" font-family="JetBrains Mono,monospace">скорость: 0 км/с</text>
+        <text id="heroStat" x="190" y="334" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink-soft)" font-family="JetBrains Mono,monospace">нажми «Запуск!» — и полетели!</text>
+      </svg>
+      <div class="hero-btns">
+        <button class="tool" id="launchBtn" type="button" style="background:var(--ink);color:var(--paper)">🚀 Запуск!</button>
+      </div>
+      <div class="scene-cap">Обратный отсчёт — взлёт — <b>орбита</b>: скорость 7,9 км/с, вес — ноль.</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ═══ 01 · ЛЕНТА ВРЕМЕНИ ═══ -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-head" style="--ns:var(--u-soft)">
+      <span class="sec-num">01</span>
+      <div><h2>Лента времени: от «бип-бип» до рекордов</h2>
+      <p>Кликай на годы — панель расскажет, что случилось. Каждая дата — шаг человечества выше.</p></div>
+    </div>
+    <div class="tl-card">
+      <div class="tl-line" id="tlDots"></div>
+      <div class="tl-info">
+        <b id="tlTitle"></b>
+        <p id="tlText"></p>
+      </div>
+    </div>
+    <details class="hist">
+      <summary>Честно о рисках: чем платят за дорогу к звёздам</summary>
+      <p>Космос — красивое, но суровое место. В 1967-м при спуске не раскрылся парашют «Союза-1» —
+         погиб Владимир Комаров. В 1971-м при возвращении с первой станции «Салют-1» потеряли
+         экипаж Добровольского, Волкова и Пацаева. А в 1968-м в тренировочном полёте разбился
+         сам Гагарин.</p>
+      <p>Космонавты знали о рисках — и летели. Каждый урок этих трагедий сделал полёты безопаснее:
+         новые парашюты, скафандры для спуска, жёсткие правила проверки. Помнить героев — значит
+         беречь новых.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ═══ 02 · ЗАЛ СЛАВЫ ═══ -->
+<section id="hall">
+  <div class="wrap">
+    <div class="sec-head" style="--ns:var(--i-soft)">
+      <span class="sec-num">02</span>
+      <div><h2>Зал славы: шесть имён</h2>
+      <p>Щёлкни по карточке — панель расскажет историю и покажет то же фото, что и на карточке.</p></div>
+    </div>
+    <div class="hall-grid">
+      <div class="cos-grid" id="cosGrid"></div>
+      <div class="cos-panel">
+        <div class="p-top">
+          <div class="p-photo-wrap" id="cpPhotoWrap">
+            <div id="cpIllu"></div>
+          </div>
+          <div>
+            <h3 id="cpName"></h3>
+            <span class="years" id="cpYears"></span>
+            <span class="subline" id="cpSub"></span>
+          </div>
+        </div>
+        <ul id="cpFacts"></ul>
+        <div class="quote" id="cpQuote"></div>
+        <div class="howto">
+          <b>Как включить настоящие фото даже без интернета:</b> создай рядом со страницей папку
+          <code>photos</code> и положи туда картинки с именами
+          <code>gagarin.jpg</code>, <code>tereshkova.jpg</code>, <code>leonov.jpg</code>,
+          <code>savitskaya.jpg</code>, <code>krikalev.jpg</code>, <code>kononenko.jpg</code>.
+          Они появятся и на карточках, и в панели. Без папки — загрузка из Википедии (если есть сеть),
+          без сети — портреты-марки.
+        </div>
+        <div class="credit">Фотографии — Википедия / Wikimedia Commons · общественное достояние</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 · ФИЗИКА ОРБИТЫ ═══ -->
+<section id="orbitlab">
+  <div class="wrap">
+    <div class="sec-head" style="--ns:var(--r-soft)">
+      <span class="sec-num">03</span>
+      <div><h2>Почему они не падают? Проверь сам!</h2>
+      <p>Крути скорость старта — и смотри на траекторию. Не хватит скорости — упадёт,
+         7,9 км/с — орбита, 11,2 — убежит от Земли навсегда. Физика честная, до последнего пикселя!</p></div>
+    </div>
+    <div class="lab-grid">
+      <div class="scene-card">
+        <svg id="orbSvg" viewBox="0 0 720 320">
+          <rect x="6" y="6" width="708" height="308" rx="16" fill="var(--bp)" stroke="var(--ink)" stroke-width="2.5"/>
+          <text x="360" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="var(--bp-ink)" font-family="JetBrains Mono,monospace">СТАРТ СВЕРХУ · ГОРИЗОНТАЛЬНО ВПРАВО</text>
+          <circle cx="360" cy="170" r="80" fill="#9CC6DA" stroke="var(--ink)" stroke-width="3"/>
+          <path d="M310 130 q30 -14 56 2 q26 16 52 5 q-22 26 -60 21 q-40 -5 -48 -28z" fill="#CBE8CF" stroke="rgba(38,34,27,.25)" stroke-width="1.5"/>
+          <circle cx="360" cy="90" r="5" fill="var(--r)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="378" y="86" font-size="11" font-weight="800" fill="var(--bp-ink)" font-family="JetBrains Mono,monospace">старт · 200 км</text>
+          <polyline id="orbTrail" fill="none" stroke="var(--u)" stroke-width="2.6" stroke-linejoin="round" points=""/>
+          <path id="orbCrash" d="M-8 -8 L8 8 M8 -8 L-8 8" stroke="var(--bad)" stroke-width="3.4" stroke-linecap="round" opacity="0"/>
+          <circle id="orbDot" cx="360" cy="90" r="8" fill="var(--r)" stroke="var(--ink)" stroke-width="2.6"/>
+        </svg>
+        <div class="graph-cap">1 пиксель = 80 км · притяжение считается честно: чем дальше — тем слабее</div>
+      </div>
+      <div class="panel">
+        <div class="ctl">
+          <div class="clabel"><span>Скорость старта</span><b id="orbVv" style="color:var(--r-deep)">7,9 км/с</b></div>
+          <input type="range" id="orbV" min="5" max="12.5" step="0.1" value="7.9" style="accent-color:var(--r)">
+        </div>
+        <span class="kchip ok" id="orbChip">Круговая орбита — дом космических станций!</span>
+        <p style="font-size:.88rem;color:#3d382e;margin-bottom:6px">
+          <b>7,9 км/с</b> — первая <span class="term" data-term="orbit">космическая</span>: падение превращается в орбиту.<br>
+          <b>11,2 км/с</b> — вторая: Земля уже не удержит.</p>
+        <div class="pair-note"><b>Секрет невесомости:</b> на высоте 400 км притяжение почти как на земле — 89%!
+          Просто станция <b>всё время падает</b>… и всё время промахивается. Падают вместе с ней
+          и космонавты — поэтому ничего не давит на опоры. Вес — ноль!</div>
+        <div class="bridge">Мостик от Ньютона: горизонтально брось камень сильно — он упадёт дальше.
+          Разгони до 7,9 км/с — поверхность Земли будет изгибаться ровно так же, как падает камень.
+          Вечное падение мимо — это и есть орбита!</div>
+        <div class="prof-row">
+          <svg class="prof-ava" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="36" r="22" fill="#F7E3C8" stroke="#26221B" stroke-width="2.5"/>
+            <path d="M10 36 Q 8 10 32 8 Q 56 10 54 36 Q 48 24 32 24 Q 16 24 10 36 Z" fill="#26221B"/>
+            <path d="M48 10 q6 -6 10 -2 q-6 1 -6 7" fill="none" stroke="#26221B" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="58" cy="16" r="4.6" fill="#D64545" stroke="#26221B" stroke-width="1.6"/>
+            <circle cx="23" cy="38" r="7.5" fill="#fff" stroke="#26221B" stroke-width="2"/>
+            <circle cx="41" cy="38" r="7.5" fill="#fff" stroke="#26221B" stroke-width="2"/>
+            <circle cx="23" cy="39" r="2" fill="#26221B"/><circle cx="41" cy="39" r="2" fill="#26221B"/>
+            <path d="M26 50 Q 32 55 38 50" fill="none" stroke="#26221B" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div class="bubble" id="profB2">Сэр Исаак и тут при деле! Гагарин летел ровно по моим законам:
+            первый — падение без помех, второй — круговая скорость √(gR). Проверяйте ползунком!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 · ПУТЬ КОСМОНАВТА ═══ -->
+<section id="path">
+  <div class="wrap">
+    <div class="sec-head" style="--ns:var(--i-soft)">
+      <span class="sec-num">04</span>
+      <div><h2>Путь космонавта: проверь свою готовность</h2>
+      <p>Отбор жёсткий: врачи, центрифуга, выживание в тайге, сотни часов в макетах.
+        А теперь — шуточная проверка тебя (галочки ставь честно!).</p></div>
+    </div>
+    <div class="ck-card">
+      <label class="ck-row"><input type="checkbox" id="ck1"><span>Смогу сказать «Поехали!» не дрогнувшим голосом</span></label>
+      <label class="ck-row"><input type="checkbox" id="ck2"><span>Готов покрутиться в центрифуге — как бельё в стиральной машине (при 8g тело в 8 раз тяжелее!)</span></label>
+      <label class="ck-row"><input type="checkbox" id="ck3"><span>Выживу сутки в лесу с ножом и фонариком (после приземления это не шутка)</span></label>
+      <label class="ck-row"><input type="checkbox" id="ck4"><span>Согласен на обед из тюбиков и на сон пристёгнутым к стене</span></label>
+      <div class="ck-verdict">
+        <button class="tool" id="ckBtn" type="button" style="background:var(--ink);color:var(--paper)">Показать вердикт комиссии</button>
+        <div style="margin-top:12px"><span class="kchip ok" id="ckOut" hidden></span></div>
+      </div>
+      <p style="font-size:.9rem;color:#3d382e;margin-top:14px">А ещё обязательно нужны отличное здоровье,
+        инженерное или лётное образование и умение жить в команде по несколько месяцев.
+        Валентину Терешкову в отряд, кстати, взяли в том числе за 160 прыжков с парашютом!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 · ПРОВЕРЬ СЕБЯ ═══ -->
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head" style="--ns:var(--u-soft)">
+      <span class="sec-num">05</span>
+      <div><h2>Проверь себя</h2>
+      <p>Шесть задачек. Каждая решённая с первой попытки зажигает лампочку.</p></div>
+    </div>
+    <div class="quiz-card">
+      <div class="q-top">
+        <div class="q-lamps" id="qLamps"></div>
+        <div class="q-count" id="qCount">Вопрос 1 из 6</div>
+      </div>
+      <div id="qBody">
+        <div class="q-text" id="qText"></div>
+        <div class="q-answers" id="qAnswers"></div>
+        <button class="hint-btn" id="qHintBtn" type="button">Показать подсказку</button>
+        <div class="q-hint" id="qHint" hidden style="margin-top:10px"></div>
+        <div style="margin-top:16px" id="qAfter" hidden>
+          <div class="q-why" id="qWhy"></div>
+          <button class="btn" id="qNext" type="button">Следующий вопрос</button>
+        </div>
+      </div>
+      <div class="q-final" id="qFinal" hidden>
+        <div class="qf-score" id="qfScore"></div>
+        <div class="qf-title" id="qfTitle"></div>
+        <p id="qfText" style="margin-bottom:16px"></p>
+        <button class="btn" id="qRestart" type="button">Пройти ещё раз</button>
+      </div>
+    </div>
+
+    <div class="cheat">
+      <h3>Шпаргалка звёздочёта</h3>
+      <div class="cheat-row">
+        <span class="c1">12.04.1961 · 108 минут</span><span>·</span>
+        <span class="c2">7,9 км/с = орбита</span><span>·</span>
+        <span class="c3">невесомость = вечное падение</span>
+      </div>
+      <div class="rules4">
+        <div><b>Первая женщина</b><p>Валентина Терешкова, «Чайка», июнь 1963: почти трое суток и 48 витков вокруг Земли.</p></div>
+        <div><b>Первый выход</b><p>Алексей Леонов, 18 марта 1965: 12 минут вне корабля. Скафандр раздулся — вошёл в люк головой вперёд, стравив воздух.</p></div>
+        <div><b>Последний гражданин СССР</b><p>Сергей Крикалёв: улетел в мае 1991-го из СССР, приземлился в марте 1992-го в России. 311 суток на орбите!</p></div>
+        <div><b>Рекорд долгожительства орбиты</b><p>Олег Кононенко — 1116 суток суммарно за 5 полётов. Больше трёх лет своей жизни — в невесомости!</p></div>
+      </div>
+      <p>12 апреля вся Россия и мир празднуют <b>День космонавтики</b>. А началось всё с металлического
+         шара 58 см, который в 1957-м пищал с орбиты «бип-бип» — слушал весь мир по радио.
+         От спутника до рекордных 1116 суток — меньше семидесяти лет. Кто знает, какой рекорд
+         поставишь ты?</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <b>Поехали! · урок одиннадцатый.</b> Ни один виток на этой странице не прошёл мимо физики Ньютона.
+</footer>
+
+<div id="tooltip" role="tooltip"></div>
+
+<script>
+(function(){
+'use strict';
+var NS='http://www.w3.org/2000/svg';
+function $(id){return document.getElementById(id);}
+function clamp(v,a,b){return v<a?a:(v>b?b:v);}
+function fmt(v,d){if(d===undefined)d=1;return v.toFixed(d).replace('.',',');}
+var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var BADGE=$('jsBadge'),badgeErr=false;
+window.addEventListener('error',function(e){
+  if(BADGE&&!badgeErr){badgeErr=true;BADGE.textContent='⚠ '+(e.message||'ошибка');}
+});
+function safe(name,fn){try{fn();}catch(e){
+  if(BADGE&&!badgeErr){badgeErr=true;BADGE.textContent='⚠ «'+name+'»: '+e.message;}
+}}
+
+var TERMS={
+  orbit:'ОРБИТА — путь вокруг планеты. Чтобы остаться на орбите, нужна первая космическая скорость ≈ 7,9 км/с.',
+  neves:'НЕВЕСОМОСТЬ — нет опор, всё свободно падает вместе. На орбите падение длится вечно — поэтому вес ноль.',
+  iss:'МКС — Международная космическая станция на высоте ~400 км; дом экипажей с ноября 2000 года.',
+  skaf:'СКАФАНДР — «космический костюм»: держит давление, кислород и тепло, когда снаружи вакуум.',
+  cosmod:'КОСМОДРОМ — стартовый порт кораблей: Байконур, Восточный, Плесецк.'
+};
+safe('словарик',function(){
+  var tip=$('tooltip'),tipEl=null;
+  function showTip(el){
+    var def=TERMS[el.getAttribute('data-term')];if(!def)return;
+    tip.textContent=def;tip.classList.add('show');
+    var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+    var x=clamp(r.left+r.width/2-tw/2,10,innerWidth-tw-10);
+    var y=r.top-th-11,below=(y<10);if(below)y=r.bottom+11;
+    tip.style.left=x+'px';tip.style.top=y+'px';
+    tip.style.setProperty('--ax',clamp(r.left+r.width/2-x,16,tw-16)+'px');
+    tip.classList.toggle('below',below);
+  }
+  document.addEventListener('mouseover',function(e){
+    var t=e.target.closest?e.target.closest('[data-term]'):null;
+    if(t){tipEl=t;showTip(t);}
+  });
+  document.addEventListener('mouseout',function(e){
+    if(tipEl&&(!e.relatedTarget||!tipEl.contains(e.relatedTarget))){tip.classList.remove('show');tipEl=null;}
+  });
+  document.addEventListener('click',function(e){
+    var t=e.target.closest?e.target.closest('[data-term]'):null;
+    if(t){tipEl=t;showTip(t);}
+    else tip.classList.remove('show');
+  });
+});
+
+var SPARK=['#F2A007','#18A78E','#E2593B','#F5C542','#26221B'];
+function burst(x,y){
+  if(reduced)return;
+  for(var i=0;i<14;i++){
+    var s=document.createElement('div');s.className='spark';
+    s.style.background=SPARK[i%SPARK.length];
+    s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);
+    var ang=Math.random()*Math.PI*2,d=45+Math.random()*60;
+    var anim=s.animate([
+      {transform:'translate(0,0) rotate(45deg) scale(1)',opacity:1},
+      {transform:'translate('+(Math.cos(ang)*d)+'px,'+(Math.sin(ang)*d+10)+'px) rotate('+(180+Math.random()*260)+'deg) scale(.25)',opacity:0}
+    ],{duration:550+Math.random()*350,easing:'cubic-bezier(.15,.6,.3,1)'});
+    anim.onfinish=(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s);
+  }
+}
+
+var heroTick=function(){},orbTick=function(){};
+
+/* ═══ ГЕРОЙ: СТАРТОВЫЙ СТОЛ ═══ */
+safe('стартовый стол',function(){
+  var st={phase:'idle',t:0,ang:0};
+  var rkG=$('rkG'),rkScene=$('rkScene'),rkFlame=$('rkFlame'),
+      orbScene=$('orbScene'),cdTxt=$('cdTxt'),capDot=$('capDot'),
+      heroSpd=$('heroSpd'),heroStat=$('heroStat'),btn=$('launchBtn');
+  btn.addEventListener('click',function(){
+    if(st.phase==='idle'){
+      st.phase='count';st.t=0;
+      heroStat.textContent='проверка систем…';
+      this.textContent='⟲ Сброс';
+    }else{
+      st.phase='idle';st.t=0;st.ang=0;
+      cdTxt.setAttribute('opacity','0');
+      rkFlame.setAttribute('opacity','0');
+      rkScene.style.display='';
+      orbScene.setAttribute('opacity','0');
+      rkG.setAttribute('transform','translate(190,206)');
+      heroSpd.textContent='скорость: 0 км/с';
+      heroStat.textContent='нажми «Запуск!» — и полетели!';
+      this.textContent='🚀 Запуск!';
+    }
+  });
+  heroTick=function(dt){
+    if(st.phase==='count'){
+      st.t+=dt;
+      var n=Math.ceil(5-st.t);
+      cdTxt.setAttribute('opacity','1');
+      cdTxt.setAttribute('fill',n<=2?'#D64545':'#8F5E02');
+      cdTxt.textContent=(n>0)?String(n):'Поехали!';
+      rkG.setAttribute('transform','translate('+(190+Math.sin(st.t*40)*1.6).toFixed(1)+',206)');
+      if(st.t>=5.6){st.phase='ascent';st.t=0;cdTxt.setAttribute('opacity','0');}
+    }else if(st.phase==='ascent'){
+      st.t+=dt;
+      var p=Math.min(st.t/3.4,1);
+      var ease=p*p;
+      rkG.setAttribute('transform','translate(190,'+(206-ease*400).toFixed(1)+')');
+      rkFlame.setAttribute('opacity','1');
+      rkFlame.firstElementChild.setAttribute('d','M-9 44 Q'+(Math.random()*6-3)+' '+(66+Math.random()*14)+' 9 44 Q0 52 -9 44 Z');
+      heroSpd.textContent='скорость: '+fmt(ease*7.9)+' км/с';
+      heroStat.textContent=p<0.5?'отрыв! разделение ступеней…':'выход на расчётную орбиту…';
+      if(p>=1){
+        st.phase='orbit';st.t=0;
+        rkScene.style.display='none';
+        orbScene.setAttribute('opacity','1');
+        heroSpd.textContent='скорость: 7,9 км/с';
+        heroStat.textContent='вес: 0 · высота 400 км · вечное падение мимо Земли!';
+        var r=$('heroSvg').getBoundingClientRect();
+        burst(r.left+r.width*0.5,r.top+r.height*0.4);
+      }
+    }else if(st.phase==='orbit'){
+      st.ang+=dt*1.15;
+      var cx=190+Math.sin(st.ang)*128, cy=260-Math.cos(st.ang)*128;
+      capDot.setAttribute('cx',cx.toFixed(1));
+      capDot.setAttribute('cy',cy.toFixed(1));
+      capDot.setAttribute('opacity',Math.sin(st.ang)>0.25?'0.35':'1');
+    }
+  };
+});
+
+/* ═══ ЛЕНТА ВРЕМЕНИ ═══ */
+safe('лента-времени',function(){
+  var TL=[
+    {y:'1957',t:'Космическая эра открыта!',x:'4 октября «Спутник-1» — первый искусственный спутник Земли. Металлический шар 58 см с четырьмя антеннами три недели пищал «бип-бип», и слушал его весь мир по радио.'},
+    {y:'1961',t:'Юрий Гагарин · первый человек в космосе',x:'12 апреля «Восток-1» совершил один виток за 108 минут, поднявшись до 327 км. Знаменитое «Поехали!» слышал весь мир. Теперь 12 апреля — День космонавтики!'},
+    {y:'1963',t:'Валентина Терешкова · первая женщина',x:'16 июня стартовала «Восток-6», позывной «Чайка». Почти трое суток и 48 витков! До космоса Валентина работала ткачихой и совершила 160 прыжков с парашютом — именно они и открыли ей дорогу в отряд.'},
+    {y:'1965',t:'Алексей Леонов · первый выход в открытый космос',x:'18 марта «Восход-2»: Леонов провёл вне корабля 12 минут. В вакууме скафандр раздулся — в люк влезть было нельзя! Пришлось стравить воздух и входить головой вперёд. Смелость и холодная голова.'},
+    {y:'1971',t:'«Салют-1» · первая в мире станция',x:'Человечество построило дом на орбите! Потом были «Мир» (1986, 15 лет в работе) и МКС, где с ноября 2000 года люди живут непрерывно.'},
+    {y:'1984',t:'Светлана Савицкая · женщина в открытом космосе',x:'25 июля 1984 года Савицкая вышла в открытый космос и провела там 3,5 часа — впервые в мире! А ещё она двукратная чемпионка мира по пилотажу реактивных самолётов.'},
+    {y:'1991',t:'Сергей Крикалёв · последний гражданин СССР',x:'Улетел в мае 1991-го гражданином СССР, приземлился в марте 1992-го — уже гражданином России: страна за это время исчезла с карт! 311 суток на орбите. СМИ назвали его «последним гражданином СССР».'},
+    {y:'2024',t:'Олег Кононенко · рекорд времени',x:'После пятого полёта суммарное время Кононенко на орбите достигло 1116 суток — больше трёх лет! Мировой рекорд. А экипажи продолжают летать: с Байконура и Восточного.'}
+  ];
+  var dotsBox=$('tlDots');
+  for(var i=0;i<TL.length;i++){
+    (function(n){
+      var b=document.createElement('button');
+      b.className='tl-dot';b.type='button';b.textContent=TL[n].y;
+      b.addEventListener('click',function(){
+        var all=dotsBox.querySelectorAll('.tl-dot');
+        for(var k=0;k<all.length;k++){if(all[k]===b)all[k].classList.add('sel');else all[k].classList.remove('sel');}
+        $('tlTitle').innerHTML='<span class="tl-year">'+TL[n].y+' ·</span> '+TL[n].t;
+        $('tlText').textContent=TL[n].x;
+      });
+      dotsBox.appendChild(b);
+    })(i);
+  }
+  dotsBox.querySelectorAll('.tl-dot')[1].classList.add('sel');
+  $('tlTitle').innerHTML='<span class="tl-year">'+TL[1].y+' ·</span> '+TL[1].t;
+  $('tlText').textContent=TL[1].x;
+});
+
+/* ═══ ЗАЛ СЛАВЫ ═══
+   Единый загрузчик фото: адрес находится ОДИН раз на человека и раздаётся
+   и карточке, и панели — поэтому в панели всегда то же фото, что и на карточке. */
+safe('зал-славы',function(){
+  /* портрет-«марка» — рисуется кодом и есть всегда */
+  function portrait(suit,accent,hairColor,hair){
+    var skin='#F7E3C8',hairPath='';
+    if(hair==='short'){
+      hairPath='<path d="M39 46 Q36 22 60 20 Q84 22 81 46 Q81 34 74 31 Q60 26 46 31 Q39 34 39 46 Z" fill="'+hairColor+'"/>';
+    }else if(hair==='side'){
+      hairPath='<path d="M39 46 Q36 22 60 20 Q84 22 81 46 Q81 32 70 28 Q54 24 44 32 Q39 37 39 46 Z" fill="'+hairColor+'"/>'+
+        '<path d="M42 30 Q56 22 74 30" fill="none" stroke="'+hairColor+'" stroke-width="5" stroke-linecap="round"/>';
+    }else if(hair==='bob'){
+      hairPath='<path d="M34 64 Q28 18 60 16 Q92 18 86 64 Q86 48 78 42 Q60 32 42 42 Q34 48 34 64 Z" fill="'+hairColor+'"/>';
+    }else{
+      hairPath='<path d="M34 66 Q30 16 60 15 Q90 16 86 66 Q88 52 78 44 Q60 32 42 44 Q32 52 34 66 Z" fill="'+hairColor+'"/>'+
+        '<path d="M33 52 q-4 6 0 12 M87 52 q4 6 0 12" fill="none" stroke="'+hairColor+'" stroke-width="6" stroke-linecap="round"/>';
+    }
+    return '<svg viewBox="0 0 120 140" aria-hidden="true">'+
+      '<rect x="0" y="0" width="120" height="140" fill="'+accent+'" opacity=".28"/>'+
+      '<rect x="3" y="3" width="114" height="134" rx="10" fill="none" stroke="#26221B" stroke-width="2" opacity=".35"/>'+
+      '<path d="M25 140 L25 104 Q25 84 45 82 L75 82 Q95 84 95 104 L95 140 Z" fill="'+suit+'" stroke="#26221B" stroke-width="3"/>'+
+      '<path d="M48 84 L60 100 72 84" fill="none" stroke="#26221B" stroke-width="2.4"/>'+
+      '<path d="M60 100 l6 14 h-12 Z" fill="'+accent+'" stroke="#26221B" stroke-width="1.6"/>'+
+      '<rect x="18" y="92" width="14" height="30" rx="6" fill="'+suit+'" stroke="#26221B" stroke-width="2.4"/>'+
+      '<rect x="88" y="92" width="14" height="30" rx="6" fill="'+suit+'" stroke="#26221B" stroke-width="2.4"/>'+
+      '<path d="M60 112 l3.4 7 7.6 1 -5.5 5.3 1.3 7.4 -6.8 -3.6 -6.8 3.6 1.3 -7.4 -5.5 -5.3 7.6 -1 Z" fill="'+accent+'" stroke="#26221B" stroke-width="1.2"/>'+
+      '<rect x="52" y="62" width="16" height="18" rx="6" fill="'+skin+'" stroke="#26221B" stroke-width="2"/>'+
+      '<ellipse cx="60" cy="44" rx="21" ry="24" fill="'+skin+'" stroke="#26221B" stroke-width="2.6"/>'+
+      hairPath+
+      '<circle cx="52" cy="46" r="2.4" fill="#26221B"/><circle cx="68" cy="46" r="2.4" fill="#26221B"/>'+
+      '<path d="M47.5 41 q4.5 -3.5 9 0 M63.5 41 q4.5 -3.5 9 0" fill="none" stroke="#26221B" stroke-width="1.7" stroke-linecap="round"/>'+
+      '<path d="M52 55 q8 6 16 0" fill="none" stroke="#26221B" stroke-width="2" stroke-linecap="round"/>'+
+      '</svg>';
+  }
+  var COS=[
+    {n:'Юрий Гагарин',y:'1934–1968 · космонавт №1',suit:'var(--i)',acc:'var(--u)',
+     sub:'первый человек в космосе',hair:'#3a3128',hs:'side',
+     local:'gagarin.jpg',
+     wiki:'Гагарин, Юрий Алексеевич',wikiEn:'Yuri Gagarin',
+     files:['Yuri Gagarin (1961).jpg','Yuri Gagarin.jpg'],
+     f:['12 апреля 1961 — один виток вокруг Земли за 108 минут, высота до 327 км','Позывной «Кедр», корабль «Восток-1», старт с Байконура','Родился в селе Клушино Смоленской области, прошёл школу военных лётчиков-истребителей','Погиб в 1968-м в тренировочном полёте; его имя носят город, кратер на Луне и малая планета'],
+     q:'Облетев Землю в корабле-спутнике, я увидел, как прекрасна наша планета. Люди, будем хранить и приумножать эту красоту, а не разрушать её!'},
+    {n:'Валентина Терешкова',y:'р. 1937 · «Чайка»',suit:'var(--u)',acc:'var(--r)',
+     sub:'первая женщина-космонавт',hair:'#6b4a2f',hs:'bob',
+     local:'tereshkova.jpg',
+     wiki:'Терешкова, Валентина Владимировна',wikiEn:'Valentina Tereshkova',
+     files:['Valentina Tereshkova 1963.jpg','Valentina Tereshkova.jpg'],
+     f:['16–19 июня 1963: почти трое суток в космосе, 48 витков вокруг Земли','До отряда — ткачиха ярославского комбината и инструктор по парашютам (160 прыжков!)','Единственная женщина, совершившая одиночный космический полёт','В её честь названы кратер на Луне и малая планета 1671 Чайка'],
+     q:'Если бы меня спросили, полечу ли я ещё раз, — ответила бы да, и без всяких раздумий.'},
+    {n:'Алексей Леонов',y:'1934–2019 · человек вне корабля',suit:'var(--r)',acc:'var(--u)',
+     sub:'первый выход в открытый космос',hair:'#4a4038',hs:'short',
+     local:'leonov.jpg',
+     wiki:'Леонов, Алексей Архипович',wikiEn:'Alexei Leonov',
+     files:['Alexei Leonov 1965.jpg','Alexei Leonov.jpg'],
+     f:['18 марта 1965: 12 минут вне «Восхода-2», удаление до 5,4 м от корабля','Скафандр раздулся в вакууме — снижал давление, чтобы войти в люк','Художник: брал в полёт цветные карандаши и рисовал космос с натуры','Второй полёт — 1975 год, стыковка «Союз–Аполлон» с американцами'],
+     q:'Понимаете, какая красота! — так он описал Землю под собой из открытого космоса.'},
+    {n:'Светлана Савицкая',y:'р. 1948 · Салют-7',suit:'var(--u)',acc:'var(--i)',
+     sub:'первая женщина в открытом космосе',hair:'#54381f',hs:'wavy',
+     local:'savitskaya.jpg',
+     wiki:'Савицкая, Светлана Евгеньевна',wikiEn:'Svetlana Savitskaya',
+     files:['Svetlana Savitskaya.jpg','Svetlana Savitskaya 1984.jpg'],
+     f:['1982 — второй полёт женщины в истории (первый — Терешкова)','25 июля 1984: выход на 3,5 часа с испытаниями сварочного инструмента','Двукратная чемпионка мира по пилотажу на реактивных самолётах','Дочь маршала авиации — лётчиком стала раньше, чем космонавтом'],
+     q:'Космос не делится на мужской и женский — он требует подготовки и характера.'},
+    {n:'Сергей Крикалёв',y:'р. 1958 · 803 суток',suit:'var(--i)',acc:'var(--r)',
+     sub:'«последний гражданин СССР»',hair:'#3a3128',hs:'short',
+     local:'krikalev.jpg',
+     wiki:'Крикалёв, Сергей Константинович',wikiEn:'Sergei Krikalev',
+     files:['Sergei Krikalev.jpg','Sergey Krikalev.jpg'],
+     f:['6 космических полётов, 803 суток — рекорд XX века','Май 1991 – март 1992: улетел из СССР, приземлился в новой России — 311 дней на орбите','Из-за огромной скорости его время шло чуть медленнее земного — он «помолодел» на долю секунды!','Работал на станции «Мир» и на МКС; дважды Герой — Советского Союза и России'],
+     q:'Мы летали не из одной страны в другую — мы летали за всех людей Земли.'},
+    {n:'Олег Кононенко',y:'р. 1964 · 1116 суток',suit:'var(--r)',acc:'var(--u)',
+     sub:'мировой рекорд долгожительства на орбите',hair:'#2f2a24',hs:'short',
+     local:'kononenko.jpg',
+     wiki:'Кононенко, Олег Дмитриевич',wikiEn:'Oleg Kononenko',
+     files:['Oleg Kononenko.jpg','Oleg Kononenko (NASA).jpg'],
+     f:['Пять полётов, суммарно 1116 суток — больше трёх лет в невесомости!','В 2024 году впервые в мире превысил отметку 1000 суток','За все полёты сделал больше 16 000 витков вокруг Земли','Инженер-механик: в отряд космонавтов попал после работы в ЦПК'],
+     q:'Самое дорогое на орбите — смотреть, как под тобой вращается вся планета целиком.'}
+  ];
+
+  /* ── единый загрузчик: один адрес на человека для карточки И панели ── */
+  var photoState={};   /* n -> {status:'pending'|'ok'|'none', url, waiters:[]} */
+  function testURL(url,cb){
+    var im=new Image();
+    im.onload=function(){cb(true);};
+    im.onerror=function(){cb(false);};
+    im.src=url;
+  }
+  function requestPhoto(n,cb){
+    var p=COS[n],st=photoState[n];
+    if(st){                      /* уже искали: мгновенный ответ или подписка */
+      if(st.status==='pending')st.waiters.push(cb);
+      else cb(st.url);
+      return;
+    }
+    st=photoState[n]={status:'pending',url:null,waiters:[cb]};
+    var chain=[
+      'photos/'+p.local,         /* 1) локальная папка — работает офлайн */
+      {api:'https://ru.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(p.wiki.replace(/ /g,'_'))},
+      {api:'https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(p.wikiEn.replace(/ /g,'_'))},
+      'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(p.files[0])+'?width=480'
+    ];
+    if(p.files[1])chain.push('https://commons.wikimedia.org/wiki/Special:FilePath/'+
+      encodeURIComponent(p.files[1])+'?width=480');
+    var i=0;
+    function finish(url){
+      st.status=url?'ok':'none';
+      st.url=url||null;
+      var ws=st.waiters;st.waiters=[];
+      for(var k=0;k<ws.length;k++)ws[k](st.url);
+    }
+    function tryStep(){
+      if(i>=chain.length){finish(null);return;}
+      var s=chain[i++];
+      if(typeof s==='string'){
+        testURL(s,function(ok){ if(ok)finish(s); else tryStep(); });
+      }else{
+        if(typeof fetch!=='function'){tryStep();return;}
+        fetch(s.api).then(function(r){
+          if(!r.ok)throw 0;
+          return r.json();
+        }).then(function(d){
+          if(d&&d.thumbnail&&d.thumbnail.source)finish(d.thumbnail.source);
+          else throw 0;
+        }).catch(function(){tryStep();});
+      }
+    }
+    tryStep();
+  }
+  function setImg(img,url){
+    if(url){img.src=url;img.style.display='block';}
+  }
+
+  var grid=$('cosGrid'),cards=[];
+  for(var i=0;i<COS.length;i++){
+    (function(n){
+      var card=document.createElement('div');
+      card.className='cos-card';
+      card.innerHTML='<div class="ph-wrap">'+
+        '<div class="ph-illu">'+portrait(COS[n].suit,COS[n].acc,COS[n].hair,COS[n].hs)+'</div>'+
+        '<img class="ph-photo" alt="Фотография: '+COS[n].n+'" referrerpolicy="no-referrer">'+
+        '</div><b>'+COS[n].n+'</b><span>'+COS[n].sub+'</span>';
+      var img=card.querySelector('img');
+      requestPhoto(n,function(url){setImg(img,url);});
+      card.addEventListener('click',function(){select(n);});
+      grid.appendChild(card);
+      cards.push(card);
+    })(i);
+  }
+  function select(n){
+    for(var k=0;k<cards.length;k++){
+      cards[k].style.outline=(k===n)?'3px solid var(--i)':'';
+    }
+    $('cpName').textContent=COS[n].n;
+    $('cpYears').textContent=COS[n].y;
+    $('cpSub').textContent=COS[n].sub;
+    $('cpIllu').innerHTML=portrait(COS[n].suit,COS[n].acc,COS[n].hair,COS[n].hs);
+    var ul=$('cpFacts');
+    ul.innerHTML='';
+    for(var j=0;j<COS[n].f.length;j++){
+      var li=document.createElement('li');
+      li.textContent=COS[n].f[j];
+      ul.appendChild(li);
+    }
+    $('cpQuote').textContent='«'+COS[n].q+'»';
+    /* панельное фото: тот же URL, что уже нашёлся для карточки */
+    var wrap=$('cpPhotoWrap');
+    var old=wrap.querySelector('img.p-photo');
+    if(old)old.parentNode.removeChild(old);
+    var img=document.createElement('img');
+    img.className='p-photo';
+    img.alt='Фотография: '+COS[n].n;
+    img.setAttribute('referrerpolicy','no-referrer');
+    wrap.appendChild(img);
+    requestPhoto(n,function(url){setImg(img,url);});
+  }
+  select(0);
+});
+
+/* ═══ ФИЗИКА ОРБИТЫ ═══ */
+safe('лаборатория-орбит',function(){
+  var CX=360,CY=170,RE=80,SCALE=79637;
+  var trail=$('orbTrail'),dot=$('orbDot'),crash=$('orbCrash'),
+      chip=$('orbChip'),slider=$('orbV'),vv=$('orbVv');
+  var pts=[],animI=0,dead=false;
+  function simulate(v){
+    var x=0,y=-RE-2.5;
+    var vp=v*1000/SCALE;
+    var vx=vp,vy=0;
+    var G0=9.8/SCALE,R2=RE*RE;
+    var dt=30,steps=1500,out=[];
+    dead=false;
+    for(var i=0;i<steps;i++){
+      var r=Math.hypot(x,y);
+      if(r<RE){dead=true;out.push([CX+x,CY+y]);break;}
+      if(r>430){out.push([CX+x,CY+y]);break;}
+      out.push([CX+x,CY+y]);
+      var a=-G0*R2/(r*r);
+      vx+=a*x/r*dt; vy+=a*y/r*dt;
+      x+=vx*dt; y+=vy*dt;
+    }
+    return out;
+  }
+  function redraw(){
+    var v=parseFloat(slider.value);
+    vv.textContent=fmt(v)+' км/с';
+    pts=simulate(v);
+    var str='';
+    for(var i=0;i<pts.length;i+=3){
+      if(i)str+=' ';
+      str+=pts[i][0].toFixed(1)+','+pts[i][1].toFixed(1);
+    }
+    trail.setAttribute('points',str);
+    if(dead){
+      var last=pts[pts.length-1];
+      crash.setAttribute('opacity','1');
+      crash.setAttribute('transform','translate('+last[0].toFixed(1)+','+last[1].toFixed(1)+')');
+      chip.textContent='Упал на Землю — не хватило скорости!';
+      chip.className='kchip bad';
+    }else if(v>=11.2){
+      crash.setAttribute('opacity','0');
+      chip.textContent='Вторая космическая! Убегает от Земли навсегда';
+      chip.className='kchip warn';
+    }else if(v<8.2){
+      crash.setAttribute('opacity','0');
+      chip.textContent='Близко к круговой орбите — дом для станции!';
+      chip.className='kchip ok';
+    }else{
+      crash.setAttribute('opacity','0');
+      chip.textContent='Вытянутый эллипс: то ближе, то дальше от Земли';
+      chip.className='kchip warn';
+    }
+    animI=0;
+  }
+  slider.addEventListener('input',redraw);
+  orbTick=function(dt){
+    if(!pts.length)return;
+    animI+=dt*140;
+    var idx;
+    if(dead){idx=Math.min(animI,pts.length-1);}
+    else{idx=animI%(pts.length-1);}
+    var p=pts[Math.floor(idx)];
+    if(p){
+      dot.setAttribute('cx',p[0].toFixed(1));
+      dot.setAttribute('cy',p[1].toFixed(1));
+      dot.setAttribute('opacity',dead?'0.9':'1');
+    }
+  };
+  redraw();
+});
+
+/* ═══ ЧЕК-ЛИСТ ═══ */
+safe('чек-лист',function(){
+  $('ckBtn').addEventListener('click',function(){
+    var n=0;
+    if($('ck1').checked)n++;
+    if($('ck2').checked)n++;
+    if($('ck3').checked)n++;
+    if($('ck4').checked)n++;
+    var out=$('ckOut'),txt,cls;
+    if(n===4){txt='Все четыре! Комиссия в восторге — запасной бортинженер будущего полёта!';cls='ok';}
+    else if(n===3){txt='Три из четырёх — отличный результат, отбор пройдёшь. Подкачай оставшееся!';cls='ok';}
+    else if(n===2){txt='Два из четырёх. Начни с парашютного кружка — как Терешкова!';cls='warn';}
+    else{txt='Пока слабовато. Зато полёты на этой странице — без тренировок и бесплатно!';cls='warn';}
+    out.textContent=txt;
+    out.className='kchip '+cls;
+    out.hidden=false;
+    if(n>=3)burst(innerWidth/2,innerHeight/2);
+  });
+});
+
+/* ═══ ТЕСТ ═══ */
+safe('тест',function(){
+  var QUIZ=[
+    {q:'Кто и когда стал первым человеком в космосе?',
+     a:['Нил Армстронг, 1969','Юрий Гагарин, 12 апреля 1961','Алексей Леонов, 1965'],c:1,
+     hint:'Его слово «Поехали!» слышал весь мир.',
+     why:'Юрий Гагарин, «Восток-1», 12 апреля 1961 года: один виток за 108 минут.'},
+    {q:'Сколько времени длился первый в истории полёт человека в космос?',
+     a:['108 минут — один виток','3 суток','Полгода'],c:0,
+     hint:'Меньше двух часов. Корабль сделал ровно один круг.',
+     why:'108 минут, один виток. Сегодня это выглядит скромно, но тогда — прыжок человечества в новую эру!'},
+    {q:'Кто стал первой женщиной-космонавтом?',
+     a:['Светлана Савицкая','Валентина Терешкова','Салли Райд'],c:1,
+     hint:'Её позывной — «Чайка», а до космоса она прыгала с парашютом.',
+     why:'Валентина Терешкова, июнь 1963, позывной «Чайка». А Савицкая позже стала первой женщиной в открытом космосе.'},
+    {q:'Сколько примерно длился первый выход Алексея Леонова в открытый космос?',
+     a:['12 минут','2 часа','Целые сутки'],c:0,
+     hint:'Меньше четверти часа — но это был первый шаг человечества за борт.',
+     why:'Около 12 минут (18 марта 1965). За это время скафандр раздулся, и возвращаться пришлось нестандартно!'},
+    {q:'Почему космонавты на МКС находятся в невесомости?',
+     a:['Там нет притяжения Земли','Станция и всё внутри непрерывно свободно падают вокруг Земли','Космонавты специально летают'],c:1,
+     hint:'На высоте 400 км притяжение — почти 90% земного. Так почему же вес ноль?',
+     why:'Притяжение почти как на земле! Но станция непрерывно падает — и всё время промахивается мимо Земли. Падают вместе и космонавты: вес — ноль.'},
+    {q:'Какая скорость нужна, чтобы выйти на круговую орбиту у Земли?',
+     a:['1,5 км/с','Около 7,9 км/с — первая космическая','Ровно скорость звука'],c:1,
+     hint:'Проверь в лаборатории: медленнее — падает, быстрее — эллипс.',
+     why:'Первая космическая ≈ 7,9 км/с. При 11,2 км/с (вторая космическая) тело уже улетает от Земли навсегда.'}
+  ];
+  var TITLES=function(s){return s===6?'Готов к звёздному отряду!':s>=4?'Знаток космонавтики!':s>=1?'Курсант-стажёр':'Первые шаги к звёздам — уже успех!';};
+  var qL=$('qLamps');
+  for(var i=0;i<QUIZ.length;i++){
+    var w=document.createElement('div');w.className='q-lamp';
+    w.innerHTML='<svg viewBox="0 0 24 34"><path class="bulb" d="M12 2a9 9 0 0 1 9 9c0 3.4-2 5.6-3.4 7.4-.8 1-1.1 2-1.2 3.1H7.6c-.1-1.1-.4-2.1-1.2-3.1C5 16.6 3 14.4 3 11a9 9 0 0 1 9-9z"/><rect x="7" y="23.6" width="10" height="3.2" rx="1.4" fill="#26221B"/><rect x="7.6" y="28.4" width="8.8" height="2.6" rx="1.2" fill="#26221B"/></svg>';
+    qL.appendChild(w);
+  }
+  var qi=0,qs=0,qFirst=true,qDone=false;
+  function renderQ(){
+    qDone=false;qFirst=true;
+    var q=QUIZ[qi];
+    $('qCount').textContent='Вопрос '+(qi+1)+' из '+QUIZ.length;
+    $('qText').textContent=q.q;
+    var box=$('qAnswers');
+    while(box.firstChild)box.removeChild(box.firstChild);
+    for(var i=0;i<q.a.length;i++){
+      (function(idx){
+        var b=document.createElement('button');
+        b.className='q-ans';b.type='button';b.textContent=q.a[idx];
+        b.addEventListener('click',function(){answer(idx,b);});
+        box.appendChild(b);
+      })(i);
+    }
+    $('qHint').hidden=true;
+    $('qHintBtn').hidden=false;$('qHintBtn').textContent='Показать подсказку';
+    $('qAfter').hidden=true;
+  }
+  function answer(i,btn){
+    if(qDone)return;
+    var q=QUIZ[qi];
+    if(i===q.c){
+      qDone=true;
+      btn.classList.add('good');
+      if(qFirst)qs++;
+      qL.children[qi].classList.add('lit');
+      var r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);
+      $('qWhy').textContent='Верно! '+q.why;
+      $('qHintBtn').hidden=true;$('qHint').hidden=true;
+      $('qAfter').hidden=false;
+      $('qNext').textContent=(qi===QUIZ.length-1)?'Показать результат':'Следующий вопрос';
+      var bs=$('qAnswers').children;
+      for(var k2=0;k2<bs.length;k2++)bs[k2].disabled=true;
+    }else{
+      qFirst=false;
+      btn.classList.add('bad');btn.disabled=true;
+      btn.classList.remove('shake');void btn.offsetWidth;btn.classList.add('shake');
+      $('qHint').textContent=q.hint;$('qHint').hidden=false;
+      $('qHintBtn').hidden=true;
+    }
+  }
+  $('qHintBtn').addEventListener('click',function(){
+    $('qHint').textContent=QUIZ[qi].hint;$('qHint').hidden=false;
+    $('qHintBtn').hidden=true;
+  });
+  $('qNext').addEventListener('click',function(){
+    qi++;
+    if(qi<QUIZ.length){renderQ();return;}
+    $('qBody').hidden=true;$('qFinal').hidden=false;
+    $('qfScore').textContent='Задач решено с первой попытки: '+qs+' из '+QUIZ.length;
+    $('qfTitle').textContent=TITLES(qs);
+    $('qfText').textContent=qs>=4?'Отличная подготовка! Гагарин, Терешкова, Леонов — и физика орбит. Осталось выбрать, чей рекорд побить!'
+      :'Перечитай ленту времени и зал славы — герои сами расскажут всё остальное!';
+    burst(innerWidth/2,innerHeight/3);
+  });
+  $('qRestart').addEventListener('click',function(){
+    qi=0;qs=0;
+    for(var k3=0;k3<qL.children.length;k3++)qL.children[k3].classList.remove('lit');
+    $('qFinal').hidden=true;$('qBody').hidden=false;
+    renderQ();
+  });
+  renderQ();
+});
+
+/* ═══ прогресс-полоска ═══ */
+safe('прогресс',function(){
+  var plDot=$('plDot'),plLamp=$('plLamp');
+  function onScroll(){
+    var max=document.documentElement.scrollHeight-innerHeight;
+    var p=max>0?clamp(scrollY/max,0,1):0;
+    var w=document.querySelector('.powerline').clientWidth-13;
+    plDot.style.transform='translateX('+(p*w).toFixed(1)+'px)';
+    plLamp.classList.toggle('lit',p>.985);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+});
+
+/* ═══ главный цикл ═══ */
+var last=performance.now(),failed={};
+function frame(now){
+  var dt=clamp((now-last)/1000,.001,.05);last=now;
+  try{heroTick(dt);}catch(e){if(!failed.h){failed.h=1;BADGE.textContent='⚠ цикл hero: '+e.message;}}
+  try{orbTick(dt);}catch(e){if(!failed.o){failed.o=1;BADGE.textContent='⚠ цикл orbit: '+e.message;}}
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+if(BADGE&&!badgeErr)BADGE.textContent='✓ интерактив активен';
+})();
+</script>
+</body>
+</html>
